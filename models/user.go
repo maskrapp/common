@@ -20,7 +20,7 @@ type User struct {
 	Updated      int64   `gorm:"autoUpdateTime:milli"`
 }
 type AccountVerification struct {
-	Email            string
+	Email            string `gorm:"primaryKey"`
 	VerificationCode string
 	ExpiresAt        int64
 }

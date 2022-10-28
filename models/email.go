@@ -1,7 +1,7 @@
 package models
 
 type Email struct {
-	Id         int `json:"id,omitempty"`
+	Id         int `json:"id,omitempty" gorm:"primaryKey"`
 	User       User
 	UserID     string `json:"user_id"`
 	IsPrimary  bool   `json:"is_primary"`
@@ -10,7 +10,7 @@ type Email struct {
 }
 
 type EmailVerification struct {
-	Id               int    `json:"id,omitempty"`
+	Id               int    `json:"id,omitempty" gorm:"primaryKey"`
 	Email            Email  `gorm:"constraint:onUpdate:CASCADE,onDelete:CASCADE;"`
 	EmailID          int    `json:"email_id"`
 	VerificationCode string `json:"verification_code"`
@@ -18,7 +18,7 @@ type EmailVerification struct {
 }
 
 type Mask struct {
-	Mask      string `json:"mask"`
+	Mask      string `json:"mask" gorm:"primaryKey"`
 	Enabled   bool   `json:"enabled"`
 	Email     Email  `gorm:"foreignKey:ForwardTo"`
 	ForwardTo int    `json:"forward_to"`
