@@ -18,10 +18,12 @@ type EmailVerification struct {
 }
 
 type Mask struct {
-	Mask      string `json:"mask" gorm:"primaryKey"`
-	Enabled   bool   `json:"enabled"`
-	Email     Email  `gorm:"foreignKey:ForwardTo"`
-	ForwardTo int    `json:"forward_to"`
-	User      User
-	UserID    string `json:"user_id"`
+	Mask              string `json:"mask" gorm:"primaryKey"`
+	Enabled           bool   `json:"enabled"`
+	Email             Email  `gorm:"foreignKey:ForwardTo"`
+	ForwardTo         int    `json:"forward_to"`
+	User              User
+	UserID            string `json:"user_id"`
+	MessagesReceived  int    `json:"messages_received" gorm:"default:0"`
+	MessagesForwarded int    `json:"messages_forwarded" gorm:"default:0"`
 }
