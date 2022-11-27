@@ -1,5 +1,31 @@
 package models
 
+import "time"
+
+type Provider struct {
+	ID           string `json:"id" gorm:"primaryKey"`
+	ProviderName string `json:"provider_name" gorm:"not null"`
+	User         *User
+	UserID       string    `json:"user_id"`
+	CreatedAt    time.Time `json:"created_at"`
+}
+
+type User struct {
+	ID           string  `json:"id" gorm:"primaryKey"`
+	Name         string  `json:"name" gorm:"not null"`
+	Role         int     `json:"role" gorm:"not null"`
+	Password     *string `json:"-"`
+	Email        string  `json:"email" gorm:"not null"`
+	TokenVersion int     `json:"token_version" gorm:"default:1"`
+	Updated      int64   `gorm:"autoUpdateTime:milli"`
+}
+
+type AccountVerification struct {
+	Email            string `gorm:"primaryKey"`
+	VerificationCode string
+	ExpiresAt        int64
+}
+
 type Email struct {
 	Id         int `json:"id,omitempty" gorm:"primaryKey"`
 	User       User
@@ -26,4 +52,9 @@ type Mask struct {
 	UserID            string `json:"user_id"`
 	MessagesReceived  int    `json:"messages_received" gorm:"default:0"`
 	MessagesForwarded int    `json:"messages_forwarded" gorm:"default:0"`
+}
+
+type Domain struct {
+	Domain string `json:"domain" gorm:"primaryKey"`
+	Free   bool   `json:"free"`
 }
