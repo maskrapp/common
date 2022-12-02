@@ -8,31 +8,37 @@ type Provider struct {
 	User         *User
 	UserID       string    `json:"user_id"`
 	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
 }
 
 type User struct {
-	ID           string  `json:"id" gorm:"primaryKey"`
-	Name         string  `json:"name" gorm:"not null"`
-	Role         int     `json:"role" gorm:"not null"`
-	Password     *string `json:"-"`
-	Email        string  `json:"email" gorm:"not null"`
-	TokenVersion int     `json:"token_version" gorm:"default:1"`
-	Updated      int64   `gorm:"autoUpdateTime:milli"`
+	ID           string    `json:"id" gorm:"primaryKey"`
+	Name         string    `json:"name" gorm:"not null"`
+	Role         int       `json:"role" gorm:"not null"`
+	Password     *string   `json:"-"`
+	Email        string    `json:"email" gorm:"not null"`
+	TokenVersion int       `json:"token_version" gorm:"default:1"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
 }
 
 type AccountVerification struct {
 	Email            string `gorm:"primaryKey"`
 	VerificationCode string
 	ExpiresAt        int64
+	CreatedAt        time.Time `json:"created_at"`
+	UpdatedAt        time.Time `json:"updated_at"`
 }
 
 type Email struct {
 	Id         int `json:"id,omitempty" gorm:"primaryKey"`
 	User       User
-	UserID     string `json:"user_id"`
-	IsPrimary  bool   `json:"is_primary"`
-	IsVerified bool   `json:"is_verified"`
-	Email      string `json:"email"`
+	UserID     string    `json:"user_id"`
+	IsPrimary  bool      `json:"is_primary"`
+	IsVerified bool      `json:"is_verified"`
+	Email      string    `json:"email"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 type EmailVerification struct {
@@ -49,12 +55,16 @@ type Mask struct {
 	Email             Email  `gorm:"foreignKey:ForwardTo"`
 	ForwardTo         int    `json:"forward_to"`
 	User              User
-	UserID            string `json:"user_id"`
-	MessagesReceived  int    `json:"messages_received" gorm:"default:0"`
-	MessagesForwarded int    `json:"messages_forwarded" gorm:"default:0"`
+	UserID            string    `json:"user_id"`
+	MessagesReceived  int       `json:"messages_received" gorm:"default:0"`
+	MessagesForwarded int       `json:"messages_forwarded" gorm:"default:0"`
+	CreatedAt         time.Time `json:"created_at"`
+	UpdatedAt         time.Time `json:"updated_at"`
 }
 
 type Domain struct {
-	Domain string `json:"domain" gorm:"primaryKey"`
-	Free   bool   `json:"free"`
+	Domain    string    `json:"domain" gorm:"primaryKey"`
+	Free      bool      `json:"free"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
