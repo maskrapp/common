@@ -7,8 +7,8 @@ type Provider struct {
 	ProviderName string `json:"provider_name" gorm:"not null"`
 	User         *User
 	UserID       string    `json:"user_id"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
+	CreatedAt    time.Time `json:"-"`
+	UpdatedAt    time.Time `json:"-"`
 }
 
 type User struct {
@@ -17,17 +17,17 @@ type User struct {
 	Role         int       `json:"role" gorm:"not null"`
 	Password     *string   `json:"-"`
 	Email        string    `json:"email" gorm:"not null"`
-	TokenVersion int       `json:"token_version" gorm:"default:1"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
+	TokenVersion int       `json:"-" gorm:"default:1"`
+	CreatedAt    time.Time `json:"-"`
+	UpdatedAt    time.Time `json:"-"`
 }
 
 type AccountVerification struct {
 	Email            string `gorm:"primaryKey"`
 	VerificationCode string
 	ExpiresAt        int64
-	CreatedAt        time.Time `json:"created_at"`
-	UpdatedAt        time.Time `json:"updated_at"`
+	CreatedAt        time.Time `json:"-"`
+	UpdatedAt        time.Time `json:"-"`
 }
 
 type Email struct {
@@ -37,8 +37,8 @@ type Email struct {
 	IsPrimary  bool      `json:"is_primary"`
 	IsVerified bool      `json:"is_verified"`
 	Email      string    `json:"email"`
-	CreatedAt  time.Time `json:"created_at"`
-	UpdatedAt  time.Time `json:"updated_at"`
+	CreatedAt  time.Time `json:"-"`
+	UpdatedAt  time.Time `json:"-"`
 }
 
 type EmailVerification struct {
@@ -58,13 +58,13 @@ type Mask struct {
 	UserID            string    `json:"user_id"`
 	MessagesReceived  int       `json:"messages_received" gorm:"default:0"`
 	MessagesForwarded int       `json:"messages_forwarded" gorm:"default:0"`
-	CreatedAt         time.Time `json:"created_at"`
-	UpdatedAt         time.Time `json:"updated_at"`
+	CreatedAt         time.Time `json:"-"`
+	UpdatedAt         time.Time `json:"-"`
 }
 
 type Domain struct {
 	Domain    string    `json:"domain" gorm:"primaryKey"`
 	Free      bool      `json:"free"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	CreatedAt time.Time `json:"-"`
+	UpdatedAt time.Time `json:"-"`
 }
